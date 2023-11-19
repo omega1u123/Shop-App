@@ -1,0 +1,38 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+.header{
+    height: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+
+.header p{
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.catalog_title{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.catalog{
+    margin-left: 20px;
+    margin-right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.item_card{
+    display: flex;
+    max-width: 150px;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}

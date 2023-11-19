@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link th:href="@{../static/css/main_page.css}" rel="stylesheet"/>
+    <title>ShopApp</title>
+</head>
+<body>
+    <div class="header">
+        <a href="cart_page.html">корзина</a>
+    </div>
+    <div class="main">
+        <div class="catalog_title">
+            <H1 class = "">КАТАЛОГ</H1>
+        </div>
+        <div class="catalog">
+            <div class="item_card" th:each="item: ${item}">
+                <img src="img/xiaomi.png" alt="" width="150">
+                <h3 th:text="${item.getName()}"></h3>
+                <h5 th:text="${item.getPrice()}"></h5>
+                <h5 th:text="${item.getDescription()}"></h5>
+                <h5 th:text="${item.getStore().getName()}"></h5>
+                <h5 th:text="${item.getCategory().getName()}"></h5>
+                <button>Подробнее</button>
+                <a href="item_page.html">link</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
