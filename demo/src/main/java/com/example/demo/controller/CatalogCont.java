@@ -17,7 +17,7 @@ import java.util.List;
 
 @Controller()
 @RequestMapping("/catalog")
-public class MainCont {
+public class CatalogCont {
 
     private final UserRepo userRepo;
     private final ItemRepo itemRepo;
@@ -26,7 +26,7 @@ public class MainCont {
     private final CartRepo cartRepo;
 
 
-    public MainCont(UserRepo userRepo, ItemRepo itemRepo, StoreRepo storeRepo, CartRepo cartRepo) {
+    public CatalogCont(UserRepo userRepo, ItemRepo itemRepo, StoreRepo storeRepo, CartRepo cartRepo) {
         this.userRepo = userRepo;
         this.itemRepo = itemRepo;
         this.storeRepo = storeRepo;
@@ -40,19 +40,7 @@ public class MainCont {
     }
 
 
-    @GetMapping("/cart")
-    public CartEntity getCart(){
-        CartEntity cart = new CartEntity();
-        List<ItemEntity> items = new ArrayList<>();
-        items.addAll(itemRepo.findAll());
-        cart.setUser(userRepo.findUserEntityByLogin("user1"));
-        cart.setItemIds(items.get(0));
-        cartRepo.save(cart);
-        return cart;
-    }
-
-
-    @GetMapping("/cartPage")
+    @GetMapping("/catalogPage")
     public String getCartPage(Model model){
         CartEntity cart = new CartEntity();
         List<ItemEntity> items = new ArrayList<>();
@@ -64,7 +52,6 @@ public class MainCont {
 
     @GetMapping("/create")
     public String create(){
-
         return "ok";
     }
 }

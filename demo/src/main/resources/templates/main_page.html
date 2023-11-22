@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="header">
-        <a href="cart_page.html">корзина</a>
+        <a href="/cart/getCart">корзина</a>
     </div>
     <div class="main">
         <div class="catalog_title">
@@ -22,8 +22,10 @@
                 <h5 th:text="${item.getDescription()}"></h5>
                 <h5 th:text="${item.getStore().getName()}"></h5>
                 <h5 th:text="${item.getCategory().getName()}"></h5>
-                <button>Подробнее</button>
-                <a href="item_page.html">link</a>
+
+                <a th:href="@{/item/getItem(id=${item.getId()})}">
+                    <button type="button">Подробнее</button>
+                </a>
             </div>
         </div>
     </div>

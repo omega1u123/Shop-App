@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/item_page.css">
     <title>ShopApp</title>
 </head>
-<body>
+<body >
     <div class="header">
         <p>корзина</p>
     </div>
-    <div class="main">
+    <div class="main" th:each="item: ${item}">
         <div class="item_title">
-            <h1>XIAOMI</h1>
+            <h1 th:text="${item.get().getName()}"></h1>
         </div>
-        <div class="item_content">
+        <div class="item_content" >
             <img src="img/xiaomi.png" alt="" width="250">
-            <p>description</p>
-            <p>100$</p>
+            <p th:text="${item.get().getDescription()}"></p>
+            <p th:text="${item.get().getPrice()}" ></p>
             <button>купить</button>
         </div>
     </div>

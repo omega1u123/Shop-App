@@ -35,7 +35,7 @@ public class CartCont {
         CartEntity cart = new CartEntity();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         cart.setUser(userRepo.findUserEntityByLogin(auth.getName()));
-        cart.setItemIds(itemRepo.findById(2));
+        cart.setItemIds(itemRepo.findById(2L));
         cartRepo.save(cart);
         System.out.println(cart.toString());
     }

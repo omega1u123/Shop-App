@@ -1,6 +1,14 @@
+html{
+    max-width: 100%;
+    max-height: 100%;
+    height: 100%;
+}
+
 body{
     margin: 0;
     padding: 0;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .header{
@@ -15,6 +23,12 @@ body{
     margin-right: 10px;
 }
 
+
+
+.main{
+    max-width: 100%;
+}
+
 .catalog_title{
     display: flex;
     flex-direction: row;
@@ -22,17 +36,22 @@ body{
 }
 
 .catalog{
+    max-height: 100%;
     margin-left: 20px;
     margin-right: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex-direction: raw;
+    justify-content: center;
+    gap: 150px;
 }
 
 .item_card{
+    background-color: gainsboro;
+    border : 2px solid #000;
     display: flex;
-    max-width: 150px;
-    flex-direction: row;
+    max-width: 400px;
+    max-height: 550px;
+    flex-direction: column;
     align-items: center;
     gap: 20px;
 }

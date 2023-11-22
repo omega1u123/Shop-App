@@ -25,7 +25,7 @@ public class SecurityConfig {
                 .and()
                 .formLogin(login -> login
                         .loginPage("/auth/loginPage").permitAll()
-                        .defaultSuccessUrl("/catalog/cartPage", true)
+                        .defaultSuccessUrl("/catalog/catalogPage", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
