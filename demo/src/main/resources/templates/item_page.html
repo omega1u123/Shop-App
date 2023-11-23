@@ -8,7 +8,8 @@
 </head>
 <body >
     <div class="header">
-        <p>корзина</p>
+        <a href="/catalog/catalogPage">каталог</a>
+        <a href="/cart/getCart">корзина</a>
     </div>
     <div class="main" th:each="item: ${item}">
         <div class="item_title">
@@ -18,7 +19,36 @@
             <img src="img/xiaomi.png" alt="" width="250">
             <p th:text="${item.get().getDescription()}"></p>
             <p th:text="${item.get().getPrice()}" ></p>
-            <button>купить</button>
+                <!--<button type="button" th:attr="data-item-id=${item.get().getId()}" onclick="addToCart(this)">Добавить в корзину</button>
+                <script th:inline="javascript">
+                    function addToCart(button) {
+                        var itemId = button.getAttribute('data-item-id');
+                        fetch('/cart/addToCart?id=' + itemId, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            // body: JSON.stringify({ id: itemId }), // Можно использовать JSON, если параметр должен быть в теле запроса
+                        }).then(response => {
+                            if (!response.ok) {
+                                throw new Error('Network response was not ok');
+                            }
+                            // Обработка успешного ответа
+                            console.log('Товар успешно добавлен в корзину!');
+                        }).catch(error => {
+                            // Обработка ошибки
+                            console.error('There has been a problem with your fetch operation:', error);
+                        });
+                    }
+                </script>-->
+
+            <form method="post" th:action="@{/cart/addToCart}">
+                <input type="hidden" th:name="id" th:value="${item.get().getId()}">
+                <!-- Другие поля формы, если необходимо -->
+                <button type="submit">Добавить в корзину форма</button>
+            </form>
+
+
         </div>
     </div>
 

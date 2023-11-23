@@ -5,12 +5,15 @@ import com.example.demo.model.ItemEntity;
 import com.example.demo.model.repository.CartRepo;
 import com.example.demo.model.repository.ItemRepo;
 import com.example.demo.model.repository.UserRepo;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,16 +38,29 @@ public class CartCont {
         CartEntity cart = new CartEntity();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         cart.setUser(userRepo.findUserEntityByLogin(auth.getName()));
-        cart.setItemIds(itemRepo.findById(2L));
+        cart.setItemIds(itemRepo.findById(2L).get());
         cartRepo.save(cart);
-        System.out.println(cart.toString());
     }
+
+
+    @PostMapping("/addToCart")
+    public String addToCart(@RequestParam("id") Long id){
+        CartEntity cart = new CartEntity();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        cart.setUser(userRepo.findUserEntityByLogin(auth.getName()));
+        cart.setItemIds(itemRepo.findById(id).get());
+        cartRepo.save(cart);
+        //return "redirect:/catalog/catalogPage";
+        return "redirect:/item/getItem?id=" + id;
+    }
+
 
     @GetMapping("/getCart")
     public String getCart(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         List<CartEntity> cart = new ArrayList<>();
         List<Optional<ItemEntity>> items = new ArrayList<>();
-        cart.addAll(cartRepo.findAllByUserId(1L));
+        cart.addAll(cartRepo.findAllByUserId(userRepo.findUserEntityByLogin(auth.getName()).getId()));
         for(CartEntity cartEntity: cart){
             items.add(itemRepo.findById(cartEntity.getItemIds().getId()));
         }

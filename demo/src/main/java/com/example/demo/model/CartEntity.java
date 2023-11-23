@@ -27,6 +27,4 @@ public class CartEntity {
     @JoinColumn(name = "item_id")
     private ItemEntity itemIds;
 
-    public void setItemIds(Optional<ItemEntity> byId) {
-    }
 }
