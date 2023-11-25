@@ -1,5 +1,6 @@
 package com.example.demo.model.repository;
 
+import com.example.demo.model.CategoryEntity;
 import com.example.demo.model.ItemEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -12,5 +13,7 @@ public interface ItemRepo extends CrudRepository<ItemEntity, Long> {
 
     public List<ItemEntity> findAll();
     public Optional<ItemEntity> findById(Long id);
+
+    public List<ItemEntity> findAllByCategory(CategoryEntity category);
 
 }

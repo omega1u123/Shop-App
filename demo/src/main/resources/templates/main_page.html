@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link th:href="@{../static/css/main_page.css}" rel="stylesheet"/>
+    <link th:href="@{../static/css/main_page.css}" href="/static/css/main_page.css" rel="stylesheet"/>
     <title>ShopApp</title>
 </head>
 <body>
@@ -14,18 +14,36 @@
         <div class="catalog_title">
             <H1 class = "">КАТАЛОГ</H1>
         </div>
+        <div class="filter">
+            <button class="filter_button">по цене(возрастанию)</button>
+            <button class="filter_button">по цене(убыванию)</button>
+            <form method="get" th:action="@{/catalog/filteredPage}">
+                <select name="category" class="filter_button">
+                    <option value="0">Выбрать категорию</option>
+                    <option th:each="category : ${category}" th:value="${category.getName()}" th:text="${category.getName()}">
+                    <!--<option value="0">Выбрать категорию</option>
+                    <option value="смартфон">смартфон</option>
+                    <option value="телевизор">телевизор</option>
+                    <option value="бытовая техника">бытовая техника</option>
+                    <option value="ноутбук">ноутбук</option>-->
+                </select>
+                <button type="submit" class="filter_button">Применить</button>
+            </form>
+        </div>
         <div class="catalog">
             <div class="item_card" th:each="item: ${item}">
-                <img src="img/xiaomi.png" alt="" width="150">
-                <h3 th:text="${item.getName()}"></h3>
-                <h5 th:text="${item.getPrice()}"></h5>
-                <h5 th:text="${item.getDescription()}"></h5>
-                <h5 th:text="${item.getStore().getName()}"></h5>
-                <h5 th:text="${item.getCategory().getName()}"></h5>
+                <div class="card_top">
+                    <img width="280px" height="280px">
+                </div>
+                <div class="card_bottom">
+                    <h5  class="card_price"><span th:text="${item.getPrice()}"></span>$</h5>
+                    <h5 class="card_category" th:text="${item.getCategory().getName()}"></h5>
+                    <h3 class="card_title" th:text="${item.getName()}"></h3>
+                    <a th:href="@{/item/getItem(id=${item.getId()})}">
+                        <button class = "card_add" type="button">Подробнее</button>
+                    </a>
+                </div>
 
-                <a th:href="@{/item/getItem(id=${item.getId()})}">
-                    <button type="button">Подробнее</button>
-                </a>
             </div>
         </div>
     </div>

@@ -1,16 +1,14 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.CartEntity;
+import com.example.demo.model.CategoryEntity;
 import com.example.demo.model.ItemEntity;
 import com.example.demo.model.UserEntity;
-import com.example.demo.model.repository.CartRepo;
-import com.example.demo.model.repository.ItemRepo;
-import com.example.demo.model.repository.StoreRepo;
-import com.example.demo.model.repository.UserRepo;
+import com.example.demo.model.repository.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,16 +19,13 @@ public class CatalogCont {
 
     private final UserRepo userRepo;
     private final ItemRepo itemRepo;
-
-    private final StoreRepo storeRepo;
-    private final CartRepo cartRepo;
+    private final CategoryRepo categoryRepo;
 
 
-    public CatalogCont(UserRepo userRepo, ItemRepo itemRepo, StoreRepo storeRepo, CartRepo cartRepo) {
+    public CatalogCont(UserRepo userRepo, ItemRepo itemRepo, CategoryRepo categoryRepo) {
         this.userRepo = userRepo;
         this.itemRepo = itemRepo;
-        this.storeRepo = storeRepo;
-        this.cartRepo = cartRepo;
+        this.categoryRepo = categoryRepo;
     }
 
 
@@ -42,10 +37,23 @@ public class CatalogCont {
 
     @GetMapping("/catalogPage")
     public String getCartPage(Model model){
-        CartEntity cart = new CartEntity();
         List<ItemEntity> items = new ArrayList<>();
         items.addAll(itemRepo.findAll());
         model.addAttribute("item", items);
+        List<CategoryEntity> categories = new ArrayList<>();
+        categories.addAll(categoryRepo.findAll());
+        model.addAttribute("category", categories);
+        return "main_page";
+    }
+
+    @GetMapping("/filteredPage")
+    public String getFilteredPage(@RequestParam String category, Model model){
+        List<ItemEntity> items = new ArrayList<>();
+        items.addAll(itemRepo.findAllByCategory(categoryRepo.findCategoryEntityByName(category)));
+        model.addAttribute("item", items);
+        List<CategoryEntity> categories = new ArrayList<>();
+        categories.addAll(categoryRepo.findAll());
+        model.addAttribute("category", categories);
         return "main_page";
     }
 

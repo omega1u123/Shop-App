@@ -18,7 +18,7 @@
             <div class="item_card" th:each="item: ${item}">
                 <img src="img/xiaomi.png" alt="" width="150">
                 <h3 th:text = "${item.get().getName()}"></h3>
-                <h5  th:text = "${item.get().getPrice()}"></h5>
+                <h5><span th:text="${item.get().getPrice()}"></span> $</h5>
                 <button>Подробнее</button>
                 <a href="item_page.html">link</a>
             </div>
