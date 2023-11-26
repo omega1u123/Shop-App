@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Controller()
@@ -54,6 +55,23 @@ public class CatalogCont {
         List<CategoryEntity> categories = new ArrayList<>();
         categories.addAll(categoryRepo.findAll());
         model.addAttribute("category", categories);
+        return "main_page";
+    }
+
+    @GetMapping("/priceFilteredPage")
+    public String getPriceFilteredPage(@RequestParam String param,Model model){
+        List<CategoryEntity> categories = new ArrayList<>();
+        categories.addAll(categoryRepo.findAll());
+        model.addAttribute("category", categories);
+        List<ItemEntity> items = new ArrayList<>();
+        items.addAll(itemRepo.findAll());
+        Collections.sort(items);
+        if(param.equals("low")){
+            Collections.reverse(items);
+            model.addAttribute("item", items);
+            return "main_page";
+        }
+        model.addAttribute("item", items);
         return "main_page";
     }
 

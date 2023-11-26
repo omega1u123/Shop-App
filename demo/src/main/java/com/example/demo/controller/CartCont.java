@@ -33,14 +33,14 @@ public class CartCont {
         this.cartRepo = cartRepo;
     }
 
-    @GetMapping("/createCart")
+   /* @GetMapping("/createCart")
     public void creatCart(){
         CartEntity cart = new CartEntity();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         cart.setUser(userRepo.findUserEntityByLogin(auth.getName()));
         cart.setItemIds(itemRepo.findById(2L).get());
         cartRepo.save(cart);
-    }
+    }*/
 
 
     @PostMapping("/addToCart")
@@ -48,9 +48,8 @@ public class CartCont {
         CartEntity cart = new CartEntity();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         cart.setUser(userRepo.findUserEntityByLogin(auth.getName()));
-        cart.setItemIds(itemRepo.findById(id).get());
+        cart.setItem(itemRepo.findById(id).get());
         cartRepo.save(cart);
-        //return "redirect:/catalog/catalogPage";
         return "redirect:/item/getItem?id=" + id;
     }
 
@@ -62,9 +61,34 @@ public class CartCont {
         List<Optional<ItemEntity>> items = new ArrayList<>();
         cart.addAll(cartRepo.findAllByUserId(userRepo.findUserEntityByLogin(auth.getName()).getId()));
         for(CartEntity cartEntity: cart){
-            items.add(itemRepo.findById(cartEntity.getItemIds().getId()));
+            items.add(itemRepo.findById(cartEntity.getItem().getId()));
         }
         model.addAttribute("item", items);
+        float total = 0;
+        for(Optional<ItemEntity> item : items){
+            total+= item.get().getPrice();
+        }
+        model.addAttribute("total", total);
+        return "cart_page";
+    }
+
+    @PostMapping("/deleteItemFromCart")
+    public String deleteItemFromCart(@RequestParam Long id, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        List<CartEntity> cartDelete = cartRepo.findACartEntityByItemAndUser(itemRepo.findById(id).get(), userRepo.findUserEntityByLogin(auth.getName()));
+        cartRepo.delete(cartDelete.get(0));
+        List<CartEntity> cart = new ArrayList<>();
+        List<Optional<ItemEntity>> items = new ArrayList<>();
+        cart.addAll(cartRepo.findAllByUserId(userRepo.findUserEntityByLogin(auth.getName()).getId()));
+        for(CartEntity cartEntity: cart){
+            items.add(itemRepo.findById(cartEntity.getItem().getId()));
+        }
+        model.addAttribute("item", items);
+        float total = 0;
+        for(Optional<ItemEntity> item : items){
+            total+= item.get().getPrice();
+        }
+        model.addAttribute("total", total);
         return "cart_page";
     }
 

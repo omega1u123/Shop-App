@@ -25,6 +25,6 @@ public class CartEntity {
 
     @OneToOne
     @JoinColumn(name = "item_id")
-    private ItemEntity itemIds;
+    private ItemEntity item;
 
 }

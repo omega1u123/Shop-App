@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemEntity {
+public class ItemEntity implements Comparable<ItemEntity> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,4 +30,8 @@ public class ItemEntity {
     @OneToOne
     private CategoryEntity category;
 
+    @Override
+    public int compareTo(ItemEntity o) {
+        return Float.compare(this.getPrice(), o.getPrice());
+    }
 }

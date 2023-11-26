@@ -15,17 +15,18 @@
             <H1 class = "">КАТАЛОГ</H1>
         </div>
         <div class="filter">
-            <button class="filter_button">по цене(возрастанию)</button>
-            <button class="filter_button">по цене(убыванию)</button>
+            <a href="/catalog/priceFilteredPage">
+            </a>
+            <a th:href="@{/catalog/priceFilteredPage(param='hight')}">
+                <button class="filter_button">по цене(возрастанию)</button>
+            </a>
+            <a th:href="@{/catalog/priceFilteredPage(param='low')}">
+                <button class="filter_button">по цене(убыванию)</button>
+            </a>
             <form method="get" th:action="@{/catalog/filteredPage}">
                 <select name="category" class="filter_button">
                     <option value="0">Выбрать категорию</option>
                     <option th:each="category : ${category}" th:value="${category.getName()}" th:text="${category.getName()}">
-                    <!--<option value="0">Выбрать категорию</option>
-                    <option value="смартфон">смартфон</option>
-                    <option value="телевизор">телевизор</option>
-                    <option value="бытовая техника">бытовая техника</option>
-                    <option value="ноутбук">ноутбук</option>-->
                 </select>
                 <button type="submit" class="filter_button">Применить</button>
             </form>
