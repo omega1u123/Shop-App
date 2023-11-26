@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/add_item_page.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="header">
+        <a href="admin_page.html">главная</a>
+        <p class="header_title">Добавить товар</p>
+    </div>
+    <div class="main">
+          <div class="form">
+            <form th:method="post" th:action="@{/admin/addItem}">
+              <label for="image">Изображение:</label>
+              <input type="text" id="image" name="imageUrl">
+
+              <label for="name">Название</label>
+              <input type="text" id="name" name="name" placeholder="Название товара.">
+
+              <label for="category">Категория</label>
+                <select id="category" name="category">
+                    <option th:each="category : ${category}" th:value="${category.getName()}" th:text="${category.getName()}">
+                </select>
+                
+              <div>
+                <label for="price">Цена:</label>
+                <input type="number" id="price" name="price" min="0" step="0.01">
+              </div>
+              <label for="description">Описание:</label>
+              <textarea id="description" name="description"></textarea>
+              <button type="submit">add item</button>
+            </form>
+          </div>
+
+    </div>
+</body>
+</html>

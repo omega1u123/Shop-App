@@ -20,12 +20,12 @@ public class ItemEntity implements Comparable<ItemEntity> {
 
     private String name;
 
+    @Column(name = "image_url")
+    private String imageUrl;
+
     private float price;
 
     private String description;
-
-    @OneToOne
-    private StoreEntity store;
 
     @OneToOne
     private CategoryEntity category;

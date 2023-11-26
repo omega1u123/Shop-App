@@ -15,7 +15,7 @@
         <div class="item_container">
             <div class="item_content">
                 <div class="item_content_top">
-                    <img src="img/xiaomi.png" alt="" width="250">
+                    <img th:src="${item.get().imageUrl}" width="280px" height="280px">
                     <div class="item_title_price">
                         <h1 th:text="${item.get().getName()}">XIAOMI ULTRAHUY 9</h1>
                         <p th:text="${item.get().getPrice()}" >100.0$</p>

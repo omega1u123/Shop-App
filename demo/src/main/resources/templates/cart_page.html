@@ -18,7 +18,7 @@
         <div class="catalog">
             <div class="item_card" th:each="item: ${item}">
                 <div class="card_content">
-                    <img src="img/xiaomi.png" alt="" width="150" height="150">
+                    <img th:src="${item.get().imageUrl}" width="280px" height="280px">
                     <h3 th:text = "${item.get().getName()}"></h3>
                     <h5><span th:text="${item.get().getPrice()}"></span> $</h5>
                     <a href="item_page.html">

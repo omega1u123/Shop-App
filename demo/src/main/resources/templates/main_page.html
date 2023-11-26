@@ -34,7 +34,7 @@
         <div class="catalog">
             <div class="item_card" th:each="item: ${item}">
                 <div class="card_top">
-                    <img width="280px" height="280px">
+                    <img th:src="${item.imageUrl}" width="280px" height="280px">
                 </div>
                 <div class="card_bottom">
                     <h5  class="card_price"><span th:text="${item.getPrice()}"></span>$</h5>
