@@ -13,7 +13,7 @@ public interface CartRepo extends CrudRepository<CartEntity, Long> {
 
     public List<CartEntity> findAllByUserId(Long id);
 
-    public CartEntity findCartEntityByUser_Id(Long userID);
+    public List<CartEntity> findCartEntityByItem(ItemEntity item);
 
     public List<CartEntity> findACartEntityByItemAndUser(ItemEntity items, UserEntity user);
 

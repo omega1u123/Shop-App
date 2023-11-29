@@ -8,8 +8,12 @@
 </head>
 <body >
     <div class="header">
-        <a href="/catalog/catalogPage">каталог</a>
-        <a href="/cart/getCart">корзина</a>
+        <form th:action="@{/catalog/catalogPage}" method="get">
+            <button type="submit" class="logout_btn">Каталог</button>
+        </form>
+        <form th:action="@{/cart/getCart}" method="get">
+            <button type="submit" class="logout_btn">Корзина</button>
+        </form>
     </div>
     <div class="main" th:each="item: ${item}">
         <div class="item_container">

@@ -9,7 +9,9 @@
 </head>
 <body>
     <div class="header">
-        <a href="/catalog/catalogPage">каталог</a>
+        <form th:action="@{/catalog/catalogPage}" method="get">
+            <button type="submit" class="logout_btn">Каталог</button>
+        </form>
     </div>
     <div class="main">
         <div class="catalog_title">

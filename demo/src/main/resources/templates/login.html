@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/login_page.css"/>
+    <meta charset="UTF-8" />
     <title>Title</title>
 </head>
 <body>
-LOGIN
-  <form method="post" th:action="@{/auth/loginPage}">
-    <input id="username" name="username" placeholder="Имя пользователя">
-    <input id="password" name="password" placeholder="parol">
-    <button class="w-100 btn btn-lg btn-success mt-3" type="submit">Войти</button>
-  </form>
-<a href="/registration/regPage">
-    <button type="button">регистрация</button>
-</a>
+<div class="main-section">
+    <h1>LOGIN</h1>
+    <form method="post" th:action="@{/auth/loginPage}">
+        <input id="username" name="username" placeholder="Имя пользователя" />
+        <input id="password" name="password" type="password" placeholder="parol" />
+        <div class="btn-section">
+            <button class="w-100 btn btn-lg btn-success mt-3" type="submit">
+                Войти
+            </button>
+            <a href="/registration/regPage">
+                <button type="button">регистрация</button>
+            </a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

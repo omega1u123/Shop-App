@@ -8,7 +8,12 @@
 </head>
 <body>
     <div class="header">
-        <a href="/cart/getCart">корзина</a>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout_btn">Выйти</button>
+        </form>
+        <form th:action="@{/cart/getCart}" method="get">
+            <button type="submit" class="logout_btn">Корзина</button>
+        </form>
     </div>
     <div class="main">
         <div class="catalog_title">

@@ -8,17 +8,62 @@
 </head>
 <body>
     <div class="header">
-        <p class="header_title">ADMIN PAGE</p>
+        <form th:action="@{/logout}" method="post">
+            <button type="submit" class="logout_btn">Logout</button>
+        </form>
     </div>
     <div class="main">
+        <p class="header_title">ADMIN PAGE</p>
         <div class="main_content">
             <div class="add_item_wrapper">
                 <p class="main_text">Добавить товар</p>
-                <a href="/admin/addItemPage">link</a>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('.add_item_wrapper').click(function() {
+                        $.ajax({
+                            url: '/admin/addItemPage',
+                            method: 'GET',
+                            success: function(response) {
+                                // Переход на страницу при успешном ответе
+                                console.log('Запрос успешно отправлен');
+                                // Если ответ содержит URL страницы, можно использовать его для перенаправления
+                                window.location.href = '/admin/addItemPage';
+                            },
+                            error: function(xhr, status, error) {
+                                // Обработка ошибки
+                                console.error('Произошла ошибка при отправке запроса:', error);
+                            }
+                        });
+                    });
+                });
+            </script>
+
             <div class="delete_item_wrapper">
                 <p class="main_text">Удалить товар</p>
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+            <script>
+                $(document).ready(function() {
+                    $('.delete_item_wrapper').click(function() {
+                        $.ajax({
+                            url: '/admin/getDeleteItemPage',
+                            method: 'GET',
+                            success: function(response) {
+                                // Переход на страницу при успешном ответе
+                                console.log('Запрос успешно отправлен');
+                                // Если ответ содержит URL страницы, можно использовать его для перенаправления
+                                window.location.href = '/admin/getDeleteItemPage';
+                            },
+                            error: function(xhr, status, error) {
+                                // Обработка ошибки
+                                console.error('Произошла ошибка при отправке запроса:', error);
+                            }
+                        });
+                    });
+                });
+            </script>
         </div>
     </div>
 </body>
