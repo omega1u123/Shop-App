@@ -11,9 +11,9 @@ import java.util.Optional;
 @Repository
 public interface ItemRepo extends CrudRepository<ItemEntity, Long> {
 
-    public List<ItemEntity> findAll();
-    public Optional<ItemEntity> findById(Long id);
+    List<ItemEntity> findAll();
+    Optional<ItemEntity> findById(Long id);
 
-    public List<ItemEntity> findAllByCategory(CategoryEntity category);
+    List<ItemEntity> findAllByCategory(CategoryEntity category);
 
 }

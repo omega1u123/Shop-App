@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface CategoryRepo extends CrudRepository<CategoryEntity, Long> {
 
-    public List<CategoryEntity> findAll();
-    public CategoryEntity findCategoryEntityByName(String name);
+    List<CategoryEntity> findAll();
+    CategoryEntity findCategoryEntityByName(String name);
 }
