@@ -11,17 +11,15 @@ import java.util.Collections;
 public class MyUserDetails implements UserDetails {
 
     private final UserEntity userEntity;
-    private final RoleRepo roleRepo;
 
-    public MyUserDetails(UserEntity userEntity, RoleRepo roleRepo) {
+    public MyUserDetails(UserEntity userEntity) {
         this.userEntity = userEntity;
-        this.roleRepo = roleRepo;
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority(roleRepo.findRoleEntityById(userEntity.getRole().getId()).getName()));
+        return Collections.singleton(new SimpleGrantedAuthority(userEntity.getRole().getName()));
     }
 
     @Override

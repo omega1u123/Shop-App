@@ -13,11 +13,9 @@ import org.springframework.stereotype.Service;
 public class MyUserDetailsService implements UserDetailsService {
 
     private final UserRepo userRepo;
-    private final RoleRepo roleRepo;
 
-    public MyUserDetailsService(UserRepo userRepo, RoleRepo roleRepo) {
+    public MyUserDetailsService(UserRepo userRepo) {
         this.userRepo = userRepo;
-        this.roleRepo = roleRepo;
     }
 
     @Override
@@ -26,6 +24,6 @@ public class MyUserDetailsService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("User not found");
         }
-        return new MyUserDetails(user, roleRepo);
+        return new MyUserDetails(user);
     }
 }

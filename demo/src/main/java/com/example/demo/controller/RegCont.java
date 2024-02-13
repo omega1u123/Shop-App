@@ -30,7 +30,7 @@ public class RegCont {
     @PostMapping("/regSave")
     public String saveReg(Model model, @ModelAttribute("userForm") UserEntity userForm){
         UserEntity user = new UserEntity(userForm.getLogin(), userForm.getPassword());
-        user.setRole(roleRepo.findRoleEntityById(1L));
+        user.setRole(roleRepo.findRoleEntityById(2L));
         System.out.println(user.getLogin());
         userRepo.save(user);
         return "redirect:/auth/loginPage";
